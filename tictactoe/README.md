@@ -16,7 +16,7 @@ You have just taken over a project that was rushed out the door by the previous 
 ### Running tests
 
     ./bin/rspec
-    
+
 ### Notes
 
 - The tests that run against a 5x5 board are in the test file, but commented out. Uncomment once done to see whether they are passing
