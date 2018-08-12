@@ -19,4 +19,5 @@ You have just taken over a project that was rushed out the door by the previous 
 
 ### Notes
 
+- Current implementation is under `lib/tictactoe.ex` and the test file is located at `test/tictactoe_test.exs`
 - The tests that run against a 5x5 board are in the test file, but commented out. Uncomment once done to see whether they are passing
