@@ -1,21 +1,22 @@
-# Tictactoeex
+## Tic Tac Toe Analyzer
 
-**TODO: Add description**
+![tic tac toe image](./tictactoe.jpg)
 
-## Installation
+The goal of this app is to develop an application which takes a tic tac toe board, and outputs who the winner is (if any), or whether it is a draw.
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `tictactoeex` to your list of dependencies in `mix.exs`:
+### Problem
 
-```elixir
-def deps do
-  [
-    {:tictactoeex, "~> 0.1.0"}
-  ]
-end
-```
+You have just taken over a project that was rushed out the door by the previous developer. It seems to behave correctly with a 3x3 board. Thankfully, it seems like the developer has left behind a test suite to cover what they had already developed.
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/tictactoeex](https://hexdocs.pm/tictactoeex).
+### Your Goals
 
+- Refactor the existing code to prepare it to work with a n x n board
+- (BONUS) Currently the output is "draw", when there is no winner, and the game hasn't finished yet. Change this to say "unfinished" if the game hasn't been finished.
+
+### Running tests
+
+    mix test
+
+### Notes
+
+- The tests that run against a 5x5 board are in the test file, but commented out. Uncomment once done to see whether they are passing
