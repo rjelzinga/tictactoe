@@ -10,27 +10,11 @@ class TicTacToe
 
     # row checks
 
-    if row1.all? {|entry| entry == 'o'}
+    if @board.any? { |row| row.all? {|entry| entry == 'o'} }
       return "o"
     end
-
-    if row2.all? {|entry| entry == 'o'}
-      return "o"
-    end
-
-    if row3.all? {|entry| entry == 'o'}
-      return "o"
-    end
-
-    if row1.all? {|entry| entry == 'x'}
-      return "x"
-    end
-
-    if row2.all? {|entry| entry == 'x'}
-      return "x"
-    end
-
-    if row3.all? {|entry| entry == 'x'}
+    
+    if @board.any? { |row| row.all? {|entry| entry == 'x'} }
       return "x"
     end
 
