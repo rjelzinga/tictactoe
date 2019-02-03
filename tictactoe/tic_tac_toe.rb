@@ -8,10 +8,19 @@ class TicTacToe
     PLAYERS.each do |player|
       return player if winner?(player)
     end
+
+    return "unfinished" unless finished?
     return "draw"
   end
 
   private
+
+  def finished?
+    # The second condition below, where at least one player has one, is one condition 
+    # under which a game would be considered 'finished', even though it is not needed 
+    # where this method is being used.
+    @board.flatten.all? { |entry| PLAYERS.include?(entry) } || PLAYERS.any? { |player| winner?(player) }
+  end
 
   def winner?(player)
     complete_row?(player) || complete_column?(player) || complete_backward_diagonal?(player) || complete_forward_diagonal?(player)
