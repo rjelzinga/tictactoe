@@ -1,5 +1,8 @@
 class TicTacToe
-  PLAYERS = ['o', 'x'].freeze
+  PLAYERS = %w[o x].freeze
+  UNFINISHED = 'unfinished'
+  DRAW = 'draw'
+
   def initialize(board)
     @board = board
   end
@@ -9,8 +12,8 @@ class TicTacToe
       return player if winner?(player)
     end
 
-    return "unfinished" unless finished?
-    return "draw"
+    return UNFINISHED unless finished?
+    return DRAW
   end
 
   private
@@ -23,22 +26,26 @@ class TicTacToe
   end
 
   def winner?(player)
-    complete_row?(player) || complete_column?(player) || complete_backward_diagonal?(player) || complete_forward_diagonal?(player)
+    match_some_row?(player) || match_some_column?(player) || match_backward_diagonal?(player) || match_forward_diagonal?(player)
   end
 
-  def complete_row?(player)
-    @board.any? { |row| row.all? {|entry| entry == player} }
+  def match_some_row?(player)
+    @board.any? do |row| 
+      row.all? { |entry| entry == player } 
+    end
   end
 
-  def complete_column?(player)
-    (0..@board.length - 1).any? {|column_index| @board.all? {|row| row[column_index] == player} }
+  def match_some_column?(player)
+    (0..@board.length - 1).any? do |column_index| 
+      @board.all? { |row| row[column_index] == player }
+    end
   end
 
-  def complete_backward_diagonal?(player)
-    @board.each_with_index.all? {|row, column_index| row[column_index] == player }
+  def match_backward_diagonal?(player)
+    @board.each_with_index.all? { |row, column_index| row[column_index] == player }
   end
 
-  def complete_forward_diagonal?(player)
-    @board.each_with_index.all? {|row, column_index| row[@board.length - column_index - 1] == player }
+  def match_forward_diagonal?(player)
+    @board.each_with_index.all? { |row, column_index| row[@board.length - column_index - 1] == player }
   end
 end
