@@ -19,7 +19,7 @@ class TicTacToe
   private
 
   def finished?
-    # The second condition below, where at least one player has one, is one condition 
+    # The second condition below, where at least one player has won, is one condition 
     # under which a game would be considered 'finished', even though it is not needed 
     # where this method is being used.
     @board.flatten.all? { |entry| PLAYERS.include?(entry) } || PLAYERS.any? { |player| winner?(player) }
