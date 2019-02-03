@@ -36,11 +36,11 @@ class TicTacToe
       return "x"
     end
 
-    if @board.all? {|row| row[1] == 'x'} # row1[1] == "x" && row2[1] == "x" && row3[1] == "x"
+    if @board.all? {|row| row[1] == 'x'}
       return "x"
     end
 
-    if @board.all? {|row| row[2] == 'x'} #row1[2] == "x" && row2[2] == "x" && row3[2] == "x"
+    if @board.all? {|row| row[2] == 'x'}
       return "x"
     end
 
