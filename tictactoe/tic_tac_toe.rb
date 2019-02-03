@@ -1,67 +1,33 @@
 class TicTacToe
+  PLAYERS = ['o', 'x'].freeze
   def initialize(board)
     @board = board
   end
 
   def winner
-    row1 = @board[0]
-    row2 = @board[1]
-    row3 = @board[2]
-
-    # row checks
-
-    if @board.any? { |row| row.all? {|entry| entry == 'o'} }
-      return "o"
+    PLAYERS.each do |player|
+      return player if winner?(player)
     end
-    
-    if @board.any? { |row| row.all? {|entry| entry == 'x'} }
-      return "x"
-    end
-
-    # column checks
-
-    if @board.all? {|row| row[0] == 'o'}
-      return "o"
-    end
-
-    if @board.all? {|row| row[1] == 'o'}
-      return "o"
-    end
-
-    if @board.all? {|row| row[2] == 'o'}
-      return "o"
-    end
-
-    if @board.all? {|row| row[0] == 'x'}
-      return "x"
-    end
-
-    if @board.all? {|row| row[1] == 'x'}
-      return "x"
-    end
-
-    if @board.all? {|row| row[2] == 'x'}
-      return "x"
-    end
-
-    # diagonal checks
-
-    if @board.each_with_index.all? {|row, column| row[column] == 'o' }
-      return "o"
-    end
-
-    if @board.each_with_index.all? {|row, column| row[@board.length - column - 1] == 'o' }
-      return "o"
-    end
-
-    if @board.each_with_index.all? {|row, column| row[column] == 'x' }
-      return "x"
-    end
-
-    if @board.each_with_index.all? {|row, column| row[@board.length - column - 1] == 'x' }
-      return "x"
-    end
-
     return "draw"
+  end
+
+  def winner?(player)
+    complete_row?(player) || complete_column?(player) || complete_backward_diagonal?(player) || complete_forward_diagonal?(player)
+  end
+
+  def complete_row?(player)
+    @board.any? { |row| row.all? {|entry| entry == player} }
+  end
+
+  def complete_column?(player)
+    (0..@board.length - 1).any? {|column_index| @board.all? {|row| row[column_index] == player} }
+  end
+
+  def complete_backward_diagonal?(player)
+    @board.each_with_index.all? {|row, column_index| row[column_index] == player }
+  end
+
+  def complete_forward_diagonal?(player)
+    @board.each_with_index.all? {|row, column_index| row[@board.length - column_index - 1] == player }
   end
 end

@@ -174,10 +174,10 @@ describe TicTacToe do
         ["x", "x", "x", " ", " "],
         [" ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " "],
-        ["o", "o", "o", "o", "o"]
+        ["x", "x", "x", "x", "x"]
       ]
 
-      expect(TicTacToe.new(board).winner).to eq("o")
+      expect(TicTacToe.new(board).winner).to eq("x")
     end
 
     it "returns the correct winner when match found on a column" do
@@ -190,6 +190,18 @@ describe TicTacToe do
       ]
 
       expect(TicTacToe.new(board).winner).to eq("o")
+    end
+
+    it "returns the correct winner when match found on the last column" do
+      board = [
+        ["x", "x", "x", " ", "x"],
+        ["o", "x", " ", " ", "x"],
+        ["o", "x", "x", " ", "x"],
+        ["o", " ", " ", " ", "x"],
+        ["o", " ", " ", " ", "x"]
+      ]
+
+      expect(TicTacToe.new(board).winner).to eq("x")
     end
 
     it "returns the correct winner when match found on a forward diagonal" do
