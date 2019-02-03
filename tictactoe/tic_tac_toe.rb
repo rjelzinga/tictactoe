@@ -11,6 +11,8 @@ class TicTacToe
     return "draw"
   end
 
+  private
+
   def winner?(player)
     complete_row?(player) || complete_column?(player) || complete_backward_diagonal?(player) || complete_forward_diagonal?(player)
   end
