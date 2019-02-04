@@ -1,83 +1,51 @@
 class TicTacToe
+  PLAYERS = %w[o x].freeze
+  UNFINISHED = 'unfinished'
+  DRAW = 'draw'
+
   def initialize(board)
     @board = board
   end
 
   def winner
-    row1 = @board[0]
-    row2 = @board[1]
-    row3 = @board[2]
-
-    # row checks
-
-    if row1[0] == "o" && row1[1] == "o" && row1[2] == "o"
-      return "o"
+    PLAYERS.each do |player|
+      return player if winner?(player)
     end
 
-    if row2[0] == "o" && row2[1] == "o" && row2[2] == "o"
-      return "o"
+    return UNFINISHED unless finished?
+    return DRAW
+  end
+
+  private
+
+  def finished?
+    # The second condition below, where at least one player has won, is one condition 
+    # under which a game would be considered 'finished', even though it is not needed 
+    # where this method is being used.
+    @board.flatten.all? { |entry| PLAYERS.include?(entry) } || PLAYERS.any? { |player| winner?(player) }
+  end
+
+  def winner?(player)
+    match_some_row?(player) || match_some_column?(player) || match_backward_diagonal?(player) || match_forward_diagonal?(player)
+  end
+
+  def match_some_row?(player)
+    @board.any? do |row| 
+      row.all? { |entry| entry == player } 
     end
+  end
 
-    if row3[0] == "o" && row3[1] == "o" && row3[2] == "o"
-      return "o"
+  def match_some_column?(player)
+    (0..@board.length - 1).any? do |column_index| 
+      @board.all? { |row| row[column_index] == player }
     end
+  end
 
-    if row1[0] == "x" && row1[1] == "x" && row1[2] == "x"
-      return "x"
-    end
+  def match_backward_diagonal?(player)
+    @board.each_with_index.all? { |row, column_index| row[column_index] == player }
+  end
 
-    if row2[0] == "x" && row2[1] == "x" && row2[2] == "x"
-      return "x"
-    end
-
-    if row3[0] == "x" && row3[1] == "x" && row3[2] == "x"
-      return "x"
-    end
-
-    # column checks
-
-    if row1[0] == "o" && row2[0] == "o" && row3[0] == "o"
-      return "o"
-    end
-
-    if row1[1] == "o" && row2[1] == "o" && row3[1] == "o"
-      return "o"
-    end
-
-    if row1[2] == "o" && row2[2] == "o" && row3[2] == "o"
-      return "o"
-    end
-
-    if row1[0] == "x" && row2[0] == "x" && row3[0] == "x"
-      return "x"
-    end
-
-    if row1[1] == "x" && row2[1] == "x" && row3[1] == "x"
-      return "x"
-    end
-
-    if row1[2] == "x" && row2[2] == "x" && row3[2] == "x"
-      return "x"
-    end
-
-    # diagonal checks
-
-    if row1[0] == "o" && row2[1] == "o" && row3[2] == "o"
-      return "o"
-    end
-
-    if row1[2] == "o" && row2[1] == "o" && row3[0] == "o"
-      return "o"
-    end
-
-    if row1[0] == "x" && row2[1] == "x" && row3[2] == "x"
-      return "x"
-    end
-
-    if row1[2] == "x" && row2[1] == "x" && row3[0] == "x"
-      return "x"
-    end
-
-    return "draw"
+  def match_forward_diagonal?(player)
+    @board.each_with_index.all? { |row, column_index| row[@board.length - column_index - 1] == player }
   end
 end
